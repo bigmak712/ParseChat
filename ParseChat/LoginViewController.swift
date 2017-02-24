@@ -43,6 +43,7 @@ class LoginViewController: UIViewController {
             }
             else {
                 print("Sign-up successful!")
+                self.performSegue(withIdentifier: "chatSegue", sender: self)
             }
         }
     }
@@ -52,7 +53,7 @@ class LoginViewController: UIViewController {
         let password = passwordTextField.text
         
         PFUser.logInWithUsername(inBackground: username!, password: password!) {
-            (success, error) -> Void in
+            (user: PFUser?, error: Error?) -> Void in
             if let error = error {
                 let errorMessage = (error as NSError).userInfo["error"] as? NSString
                 if errorMessage != nil {
@@ -64,6 +65,7 @@ class LoginViewController: UIViewController {
             }
             else {
                 print("Login successful!")
+                self.performSegue(withIdentifier: "chatSegue", sender: self)
             }
 
         }
