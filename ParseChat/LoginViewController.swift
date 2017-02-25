@@ -13,7 +13,7 @@ class LoginViewController: UIViewController {
 
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
-    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -27,22 +27,18 @@ class LoginViewController: UIViewController {
     
     @IBAction func signUp(_ sender: Any) {
         let user = PFUser()
-        user.username = emailTextField.text
-        user.password = passwordTextField.text
+        user.username = emailTextField.text!
+        user.password = passwordTextField.text!
         
-        user.signUpInBackground{
-            (success, error) -> Void in
+        user.signUpInBackground {
+            (succeeded: Bool, error: Error?) -> Void in
             if let error = error {
-                let errorMessage = (error as NSError).userInfo["error"] as? NSString
-                if errorMessage != nil {
-                    print("ERROR: \(errorMessage)")
-                    let alertController = UIAlertController(title: "Error", message: "ERROR: Could not sign up!", preferredStyle: .alert)
-                    alertController.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
-                    self.present(alertController, animated: true)
-                }
+                let errorString = error.localizedDescription
+                let alertController = UIAlertController(title: "Error", message: errorString, preferredStyle: .alert)
+                alertController.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+                self.present(alertController, animated: true, completion: nil)
             }
             else {
-                print("Sign-up successful!")
                 self.performSegue(withIdentifier: "chatSegue", sender: self)
             }
         }
@@ -54,22 +50,15 @@ class LoginViewController: UIViewController {
         
         PFUser.logInWithUsername(inBackground: username!, password: password!) {
             (user: PFUser?, error: Error?) -> Void in
-            if let error = error {
-                let errorMessage = (error as NSError).userInfo["error"] as? NSString
-                if errorMessage != nil {
-                    print("ERROR: \(errorMessage)")
-                    let alertController = UIAlertController(title: "Error", message: "ERROR: Could not log in!", preferredStyle: .alert)
-                    alertController.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
-                    self.present(alertController, animated: true)
-                }
-            }
-            else {
-                print("Login successful!")
+            if user != nil {
                 self.performSegue(withIdentifier: "chatSegue", sender: self)
             }
-
+            else {
+                let alertController = UIAlertController(title: "Error", message: error?.localizedDescription, preferredStyle: .alert)
+                alertController.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+                self.present(alertController, animated: true)
+            }
         }
-        
     }
     
     /*

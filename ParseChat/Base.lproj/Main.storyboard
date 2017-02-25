@@ -22,49 +22,47 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uqU-HO-EXI">
-                                <rect key="frame" x="166.5" y="128" width="41" height="21"/>
+                                <rect key="frame" x="166.5" y="84" width="41" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Password" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KQz-Nc-zcR">
-                                <rect key="frame" x="150" y="219" width="74" height="21"/>
+                                <rect key="frame" x="150" y="175" width="74" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Parse" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YFT-QB-L53">
-                                <rect key="frame" x="139" y="406" width="98" height="48"/>
+                                <rect key="frame" x="139" y="362" width="98" height="48"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="40"/>
                                 <color key="textColor" red="0.36561991469999999" green="0.8418122307" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6MX-7b-uf8">
-                                <rect key="frame" x="64" y="157" width="247" height="30"/>
+                                <rect key="frame" x="64" y="113" width="247" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qLT-q1-r2C">
-                                <rect key="frame" x="64" y="248" width="247" height="30"/>
+                                <rect key="frame" x="64" y="204" width="247" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ws6-7U-etQ">
-                                <rect key="frame" x="64" y="342" width="55" height="30"/>
+                                <rect key="frame" x="64" y="298" width="55" height="30"/>
                                 <state key="normal" title="Sign Up"/>
                                 <connections>
                                     <action selector="signUp:" destination="BYZ-38-t0r" eventType="touchUpInside" id="V1b-t9-RPa"/>
-                                    <segue destination="qrs-nQ-sNA" kind="presentation" identifier="chatSegue" id="GXm-W5-naS"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pea-y7-7hK">
-                                <rect key="frame" x="273" y="342" width="38" height="30"/>
+                                <rect key="frame" x="273" y="298" width="38" height="30"/>
                                 <state key="normal" title="Login"/>
                                 <connections>
                                     <action selector="login:" destination="BYZ-38-t0r" eventType="touchUpInside" id="D2j-TW-eO0"/>
-                                    <segue destination="qrs-nQ-sNA" kind="presentation" identifier="chatSegue" id="dBm-gM-aCp"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -94,6 +92,7 @@
                     <connections>
                         <outlet property="emailTextField" destination="6MX-7b-uf8" id="bSR-WY-QUJ"/>
                         <outlet property="passwordTextField" destination="qLT-q1-r2C" id="jjB-v1-QgO"/>
+                        <segue destination="qrs-nQ-sNA" kind="presentation" identifier="chatSegue" id="hSX-Dm-YkK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -133,7 +132,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="83" id="qLu-oe-dhp" customClass="MessageCell" customModule="ParseChat" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="MessageCell" rowHeight="83" id="qLu-oe-dhp" customClass="MessageCell" customModule="ParseChat" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="83"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="qLu-oe-dhp" id="OHi-Xd-3d7">
@@ -209,7 +208,4 @@
             <point key="canvasLocation" x="1936.8" y="124.58770614692655"/>
         </scene>
     </scenes>
-    <inferredMetricsTieBreakers>
-        <segue reference="dBm-gM-aCp"/>
-    </inferredMetricsTieBreakers>
 </document>
