@@ -22,7 +22,7 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.estimatedRowHeight = 100
+        tableView.estimatedRowHeight = 120
         tableView.rowHeight = UITableViewAutomaticDimension
         
         Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(ChatViewController.getMessages), userInfo: nil, repeats: true)
@@ -42,8 +42,11 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
             (objects: [PFObject]?, error: Error?) -> Void in
             if error == nil {
                 print("Successfully retrieved \(objects!.count) messages.")
-                self.messages = objects!
-                self.tableView.reloadData()
+                
+                if let objects = objects {
+                    self.messages = objects
+                    self.tableView.reloadData()
+                }
             }
             else {
                 print("Error fetching messages")
@@ -54,13 +57,12 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBAction func sendMessage(_ sender: Any) {
         let message = PFObject(className: "Message")
         message["text"] = messageTextField.text
-        message["username"] = PFUser.current()
+        message["username"] = PFUser.current()?.username
         message.saveInBackground { (success: Bool, error: Error?) in
             if(success) {
-                print(message["text"])
+                // Message has been sent
             }
             else {
-                
             }
         }
         self.messageTextField.text = ""
@@ -71,17 +73,17 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "MessageCell", for: indexPath) as! MessageCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "MessageCell") as! MessageCell
         let message = self.messages[indexPath.row]
-        
+
         if(message["username"] != nil) {
-            cell.nameLabel.text = message["username"] as! String?
+            cell.nameLabel.text = message["username"] as? String
         }
         else {
             cell.nameLabel.isHidden = true
         }
-        
-        cell.messageLabel.text = message["text"] as! String?
+ 
+        cell.messageLabel.text = message["text"] as? String
         return cell
         
     }
