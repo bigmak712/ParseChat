@@ -37,7 +37,7 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     func getMessages() {
         let query = PFQuery(className: "Message")
-        query.includeKey("user")
+        query.includeKey("username")
         query.order(byDescending: "createdAt")
         query.findObjectsInBackground {
             (objects: [PFObject]?, error: Error?) -> Void in
@@ -45,10 +45,7 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
                 print("Successfully retrieved \(objects!.count) messages.")
                 
                 if let objects = objects {
-                    for object in objects {
-                        self.messages.append(object)
-                    }
-                    //self.messages = objects
+                    self.messages = objects
                     self.tableView.reloadData()
                 }
             }
@@ -85,7 +82,7 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
         else {
             cell.nameLabel.isHidden = true
         }
-
+        
         cell.messageLabel.text = message["text"] as? String
         return cell
         
