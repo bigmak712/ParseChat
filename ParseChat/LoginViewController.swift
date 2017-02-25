@@ -29,7 +29,6 @@ class LoginViewController: UIViewController {
         let user = PFUser()
         user.username = emailTextField.text!
         user.password = passwordTextField.text!
-        
         user.signUpInBackground {
             (succeeded: Bool, error: Error?) -> Void in
             if let error = error {
@@ -47,7 +46,6 @@ class LoginViewController: UIViewController {
     @IBAction func login(_ sender: Any) {
         let username = emailTextField.text
         let password = passwordTextField.text
-        
         PFUser.logInWithUsername(inBackground: username!, password: password!) {
             (user: PFUser?, error: Error?) -> Void in
             if user != nil {
